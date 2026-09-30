@@ -18,8 +18,8 @@
  */
 
 const ARCHIVEVOX_API_BASE =
-    "/ArchiveVox/php/api/assignments.php";
-const PHP_API_BASE = "/ArchiveVox/php/api";
+    "/ArchiveVox2/php/api/assignments.php";
+const PHP_API_BASE = "/ArchiveVox2/php/api";
 
 /* ============================================================
    GENERIC REQUEST HELPER

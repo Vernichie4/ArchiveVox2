@@ -548,7 +548,7 @@ async function fetchJson(url, options = {}) {
 // ASSIGNMENT API (PHP - migrated from Python Flask)
 // ============================================================
 
-const ASSIGNMENT_API_BASE = '/ArchiveVox/php/api/assignments.php';
+const ASSIGNMENT_API_BASE = '/ArchiveVox2/php/api/assignments.php';
 
 async function fetchAssignmentApi(endpoint, options = {}) {
     // PHP API uses query parameter for routing

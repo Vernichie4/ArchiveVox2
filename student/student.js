@@ -2,7 +2,7 @@
    ARCHIVEVOX — STUDENT DASHBOARD (Full with Quiz)
    ============================================================ */
 
-const API_BASE_URL = "/ArchiveVox/php/api/assignments.php";
+const API_BASE_URL = "/ArchiveVox2/php/api/assignments.php";
 // Grab the logged-in user from localStorage
 const storedUser = JSON.parse(localStorage.getItem("archivevox_user") || "null");
 
@@ -132,7 +132,7 @@ async function initializeStudentDashboard() {
 async function handleLogout() {
     try {
         // UPDATE: Added { method: 'POST' }
-        await fetch('/ArchiveVox/php/api/auth/logout.php', { method: 'POST' }); 
+        await fetch('/ArchiveVox2/php/api/auth/logout.php', { method: 'POST' }); 
         
         // Clear the student data from the browser's memory
         localStorage.removeItem('archivevox_user');
@@ -471,12 +471,12 @@ async function openAssignmentModal(assignmentId) {
         );
 
         // Store the detailed data
-        state.currentAssignmentDetail = data;
+        state.currentAssignmentDetail = data.assignment;
 
         // Normalize using the detail data
         const normalized = normalizeAssignment({
             ...listAssignment,
-            materials: data.materials || []   // override with detailed materials
+            materials: data.assignment.materials || []
         });
 
         state.currentAssignment = normalized;
@@ -882,7 +882,7 @@ async function submitReading() {
     if (statusEl) statusEl.textContent = "Submitting and analyzing audio...";
 
     try {
-        const response = await fetch('/ArchiveVox/php/api/shared/assessment.php?action=record', {
+        const response = await fetch('/ArchiveVox2/php/api/shared/assessment.php?action=record', {
             method: 'POST',
             body: formData,
             credentials: 'same-origin'
@@ -1027,7 +1027,7 @@ async function startQuiz() {
         state.currentQuizId = response.quiz_id;
 
         // Use questions from the detail data
-        const questions = material.questions || [];
+        const questions = response.questions || [];
         if (!questions.length) {
             throw new Error("No quiz questions found for this material.");
         }
